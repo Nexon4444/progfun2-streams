@@ -8,7 +8,7 @@ trait Solver extends GameDef:
   /**
    * Returns `true` if the block `b` is at the final position
    */
-  def done(b: Block): Boolean = b.isStanding && b.isLegal && b.b1
+  def done(b: Block): Boolean = b.isStanding && b.isLegal && Pos(b.b1.row, b.b1.col) == goal
 
   /**
    * This function takes two arguments: the current block `b` and
