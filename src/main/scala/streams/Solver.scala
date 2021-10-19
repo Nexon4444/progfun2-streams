@@ -99,7 +99,6 @@ trait Solver extends GameDef:
    * the first move that the player should perform from the starting
    * position.
    */
-  lazy val solution: List[Move] ={
-    val x = pathsToGoal.head
-    List.empty
+  lazy val solution: List[Move] = {
+    pathsToGoal.reduce{(el1, el2) => if (el1._2.size > el2._2.size) then el1 else el2}._2
   }

@@ -30,10 +30,16 @@ class BloxorzSuite extends munit.FunSuite:
       |-ooooooooo
       |-----ooToo
       |------ooo-""".stripMargin
-
     import Move.*
     val optsolution = List(Right, Right, Down, Right, Right, Right, Down)
 
+  trait LevelSimple extends SolutionChecker:
+
+    val level =
+      """SooT
+        """.stripMargin
+    import Move.*
+    val simpSolution = List(Right, Right)
 
   test("terrain function level 1 (10pts)") {
     new Level1:
@@ -54,6 +60,10 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(startPos, Pos(1, 1))
   }
 
+  test("optimal solution for level simple") {
+    new LevelSimple:
+      assertEquals(solve(solution), Block(goal, goal))
+  }
 
   test("optimal solution for level 1 (5pts)") {
     new Level1:
