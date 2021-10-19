@@ -121,25 +121,30 @@ trait GameDef:
                else if b1.row == b2.row then  deltaRow(1, 1)
                else                           deltaRow(2, 1)
 
-
+    val enum2functionMap =
+      Map(Move.Left->left, Move.Right->right, Move.Up->up, Move.Down->down)
     /**
      * Returns the list of blocks that can be obtained by moving
      * the current block, together with the corresponding move.
      */
-    def neighbors: List[(Block, Move)] = ???
+    def neighbors: List[(Block, Move)] =
+      Move.values.map(en => (enum2functionMap(en) , en)).toList
 
     /**
      * Returns the list of positions reachable from the current block
      * which are inside the terrain.
      */
-    def legalNeighbors: List[(Block, Move)] = ???
+    def legalNeighbors: List[(Block, Move)] =
+//      neighbors.withFilter((b, _) => b.isLegal)
+      neighbors.filter((b, _) => b.isLegal)
+
 
     /**
      * Returns `true` if the block is standing.
      */
-    def isStanding: Boolean = ???
+    def isStanding: Boolean = b1.col == b2.col && b1.row == b2.row
 
     /**
      * Returns `true` if the block is entirely inside the terrain.
      */
-    def isLegal: Boolean = ???
+    def isLegal: Boolean = terrain(b1) && terrain(b2)

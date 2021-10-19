@@ -64,12 +64,6 @@ trait StringParserTerrain extends GameDef:
       case Failure(ex: Exception) => throw ex
     }
 
-
-
-
-
-
-
   /**
    * This function should return the position of character `c` in the
    * terrain described by `levelVector`. You can assume that the `c`
